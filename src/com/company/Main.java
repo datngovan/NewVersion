@@ -37,6 +37,9 @@ public class Main {
 
             String readMainMenuInput = sc.nextLine();
             String readMainMenuInputSanitized = readMainMenuInput.toLowerCase().trim();
+
+            /** Begin of the lead Function */
+
             if(readMainMenuInputSanitized.equals("lead")){
                 while(true){
                     boolean leadFileExist = checker.getBoolean("lead.csv");
@@ -121,6 +124,9 @@ public class Main {
 
                     String readLeadInput = sc.nextLine();
                     String readLeadInputSanitized = readLeadInput.toLowerCase().trim();
+
+                    /** Begin of the view lead function */
+
                     if(readLeadInputSanitized.equals("view")){
                         if(leadFileExist){
                             Lead.viewLead(listOfLeads);
@@ -129,6 +135,9 @@ public class Main {
                             continue;
                         }
                     }
+
+                    /** Begin of the add lead function */
+
                     else if(readLeadInputSanitized.equals("add")){
                         while(true){
                             try{
@@ -254,6 +263,9 @@ public class Main {
                             break;
                         }
                     }
+
+                    /** Begin of the delete lead function */
+
                     else if(readLeadInputSanitized.equals("delete")){
 
                         if (leadFileExist){
@@ -272,37 +284,47 @@ public class Main {
                                     Lead.deleteLead(listOfLeads, readingCodestringInput);
 
                                     if(interactionListExist){
-                                        try {
-                                            FileWriter fileWriter = new FileWriter("interaction.csv");
-                                            fileWriter.write(interactionTitle);
-                                            fileWriter.write('\n');
-                                            for (Interaction interaction: listOfInteraction){
-                                                Calendar calendar = Calendar.getInstance();
-                                                calendar.setTime(interaction.getDate());
-                                                if(interaction.getLead().getCodeString().equals(readingCodestringInput)){
+                                        System.out.println("Do you want to delete all the interactions of this lead");
+                                        System.out.println("Please enter yes if you want to");
+                                        String input = sc.nextLine();
+                                        String inputSanitized = input.toLowerCase().trim();
+                                        if(inputSanitized.equals("yes")){
+                                            try {
+                                                FileWriter fileWriter = new FileWriter("interaction.csv");
+                                                fileWriter.write(interactionTitle);
+                                                fileWriter.write('\n');
+                                                for (Interaction interaction: listOfInteraction){
+                                                    Calendar calendar = Calendar.getInstance();
+                                                    calendar.setTime(interaction.getDate());
+                                                    if(interaction.getLead().getCodeString().equals(readingCodestringInput)){
+
+                                                    }
+                                                    else {
+                                                        fileWriter.write(interaction.getStringCode());
+                                                        fileWriter.write(',');
+                                                        fileWriter.write(calendar.get(Calendar.YEAR)+"-"+(calendar.get(Calendar.MONTH)+1)+"-"+calendar.get(Calendar.DATE));
+                                                        fileWriter.write(',');
+                                                        fileWriter.write(interaction.getLead().getCodeString());
+                                                        fileWriter.write(',');
+                                                        fileWriter.write(interaction.getMean());
+                                                        fileWriter.write(',');
+                                                        fileWriter.write(interaction.getStatus());
+                                                        fileWriter.write('\n');
+                                                    }
+                                                    System.out.print("testing");
 
                                                 }
-                                                else {
-                                                    fileWriter.write(interaction.getStringCode());
-                                                    fileWriter.write(',');
-                                                    fileWriter.write(calendar.get(Calendar.YEAR)+"-"+(calendar.get(Calendar.MONTH)+1)+"-"+calendar.get(Calendar.DATE));
-                                                    fileWriter.write(',');
-                                                    fileWriter.write(interaction.getLead().getCodeString());
-                                                    fileWriter.write(',');
-                                                    fileWriter.write(interaction.getMean());
-                                                    fileWriter.write(',');
-                                                    fileWriter.write(interaction.getStatus());
-                                                    fileWriter.write('\n');
-                                                }
-                                                System.out.print("testing");
+                                                fileWriter.close();
+
+
 
                                             }
-                                            fileWriter.close();
+                                            catch (IOException ioException){
 
-
-
-                                        }
-                                        catch (IOException ioException){
+                                            }
+                                        }else if(inputSanitized.equals("no")){
+                                            break;
+                                        }else{
 
                                         }
                                     }
@@ -318,6 +340,9 @@ public class Main {
                             continue;
                         }
                     }
+
+                    /** Begin of the update lead function */
+
                     else if (readLeadInputSanitized.equals("update")){
 
                         if(leadFileExist){
@@ -520,6 +545,9 @@ public class Main {
                     }
                 }
             }
+
+            /** Begin of the interaction Function */
+
             else if(readMainMenuInputSanitized.equals("interaction")){
                 if(leadInformationIsAdded){
                     while(true){
@@ -606,6 +634,8 @@ public class Main {
                         String readInteractionInput = sc.nextLine();
                         String readInteractionInputSanitized = readInteractionInput.toLowerCase().trim();
 
+                        /** Begin of the view interaction function */
+
                         if(readInteractionInputSanitized.equals("view")){
                             if(interactionFileExist){
                                 Interaction.viewInteraction(listOfInteractions);
@@ -613,6 +643,9 @@ public class Main {
                                 System.out.println("The file is empty or not found.");
                             }
                         }
+
+                        /** Begin of the add interaction function */
+
                         else if(readInteractionInputSanitized.equals("add")){
                             while (true){
                                 try{
@@ -755,6 +788,9 @@ public class Main {
                                 break;
                             }
                         }
+
+                        /** Begin of the delete interaction function */
+
                         else if(readInteractionInputSanitized.equals("delete")){
 
                             if (interactionFileExist){
@@ -784,6 +820,9 @@ public class Main {
                                 continue;
                             }
                         }
+
+                        /** Begin of the update interaction function */
+
                         else if (readInteractionInputSanitized.equals("update")){
 
                             if(interactionFileExist){
@@ -967,6 +1006,9 @@ public class Main {
                     continue;
                 }
             }
+
+            /** Begin of the report Function */
+
             else if(readMainMenuInputSanitized.equals("report")){
                 if(leadInformationIsAdded){
                     while (true){
@@ -984,9 +1026,15 @@ public class Main {
                         String readReportInput = functionInput.nextLine();
                         String readReportInputSanitized = readReportInput.trim().toLowerCase();
 
+                        /** Begin of the print leads function
+                         * This function print out the numbers of leads in different age ranges */
+
                         if(readReportInputSanitized.equals("view lead")){
                             Report.printViewLeads();
                         }
+                        /** Begin of the print status function
+                         * This function print out the numbers of potential status(positive, neutral or negative) within a time range */
+
                         else if(readReportInputSanitized.equals("view status")){
                             if(interactionInformationIsAdded){
                                 Report.printViewStatus();
@@ -996,6 +1044,10 @@ public class Main {
                                 continue;
                             }
                         }
+
+                        /** Begin of the print interaction function
+                         * This function print out the number of interaction in each months within the time range */
+
                         else if(readReportInputSanitized.equals("view interaction")){
                             if(interactionInformationIsAdded){
                                 Report.printViewInteractions();

@@ -14,111 +14,82 @@ import java.util.regex.Pattern;
 
 public class testFunction {
     public static void main(String[] args) {
+        String leadTitle = "stringCode,name,birthDate,gender,phone,email,address";
         String interactionTitle = "codeString,date,stringCodeOfLead,mean,status";
-        Scanner sc = new Scanner(System.in);
-        SimpleDateFormat getFormat = new SimpleDateFormat("yyyy-MM-dd");
-        String[] arrayOfMonthsTranslation = {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
+        checkFile checker = new checkFile();
+
+        boolean leadFileExist = checker.getBoolean("lead.csv");
+        int lengthOfLeadArray = checker.getLength("lead.csv");
+
+        Lead[] listOfLeads = new Lead[lengthOfLeadArray - 1];
+
+        int leadIndex = 0;
+
+        try{
+            Scanner fileReading = new Scanner(new File("lead.csv"));
+            while (fileReading.hasNext()){
+                String eachLine = fileReading.nextLine();
+                if(eachLine.equals(leadTitle)){
+
+                }else{
+                    String[] theArray = eachLine.split(",");
+                    SimpleDateFormat simpleDateformat = new SimpleDateFormat("yyyy-MM-dd");
+                    Date date = simpleDateformat.parse(theArray[2]);
+                    if (theArray[3].equals("true")){
+                        Lead lead = new Lead(theArray[0],theArray[1],date,true,theArray[4],theArray[5],theArray[6]);
+                        listOfLeads[leadIndex] = lead;
+                    }
+                    else {
+                        Lead lead = new Lead(theArray[0],theArray[1],date,false,theArray[4],theArray[5],theArray[6]);
+                        listOfLeads[leadIndex] = lead;
+                    }
+
+                    leadIndex += 1;
+                }
+            }
+            fileReading.close();
+        }catch (Exception exception){
+
+        }
+
+        boolean interactionListExist = checker.getBoolean("interaction.csv");
+        int lengthOfInteractionArray = checker.getLength("interaction.csv");
+        Interaction[] listOfInteraction = new Interaction[lengthOfInteractionArray - 1];
+        System.out.println(lengthOfInteractionArray);
+        int interactionIndex = 0;
         try{
             Scanner fileReading = new Scanner(new File("interaction.csv"));
-            System.out.println("Input the start date: ");
-            String readStartedDateInput = sc.nextLine();
-            Date startDate = getFormat.parse(readStartedDateInput);
-            System.out.println("Input the end date: ");
-            String readEndedDateInput = sc.nextLine();
-            Date endDate = getFormat.parse(readEndedDateInput);
-            Date now = new Date();
-            if(startDate.compareTo(endDate)<=0 && endDate.compareTo(now)<=0){
-                String storedString = "";
-                long countForCheck = 0;
-                while (fileReading.hasNext()){
-                    String eachLine = fileReading.nextLine();
-                    if(eachLine.equals(interactionTitle)){
+            while (fileReading.hasNext()){
+                String eachLine = fileReading.nextLine();
+                if(eachLine.equals(interactionTitle)){
 
-                    }else{
-                        String dateOfInteractionString = eachLine.split(",")[1];
-                        Date dateOfInteraction = getFormat.parse(dateOfInteractionString);
-                        if(dateOfInteraction.compareTo(startDate)>=0 && dateOfInteraction.compareTo(endDate)<=0){
-                            storedString = storedString + dateOfInteractionString +",";
-                            countForCheck +=1;
+                }
+                else{
+                    String[] theArray = eachLine.split(",");
+                    SimpleDateFormat simpleDateformat = new SimpleDateFormat("yyyy-MM-dd");
+                    Date date = simpleDateformat.parse(theArray[1]);
+                    for (Lead lead: listOfLeads){
+                        if (lead.getCodeString().equals(theArray[2])){
+                            Interaction interaction = new Interaction(theArray[0],date,lead,theArray[3],theArray[4]);
+                            listOfInteraction[interactionIndex] = interaction;
                         }
                     }
-                }
-                if(!(countForCheck>0)){
-                }
-                Date[] dates = new Date[storedString.split(",").length];
-                for(int i = 0; i<storedString.split(",").length; i++){
-                    try{
-                        Date date = getFormat.parse(storedString.split(",")[i]);
-                        dates[i] = date;
-                    }catch (ParseException parseException){
 
-                    }
+                    interactionIndex += 1;
                 }
-                Arrays.sort(dates);
-                for(int i = 0; i<dates.length; ++i){
-                    System.out.print(dates[i]);
-                    System.out.println('\n');
-                }
-                String[] newStoredString = new String[dates.length];
-                for(int i = 0; i<dates.length; ++i){
-                    String newMonthYear = dates[i].toString().split(" ")[1] + dates[i].toString().split(" ")[5];
-                    System.out.println(newMonthYear);
-                    newStoredString[i] = newMonthYear;
-                }
-                int countLength = 1;
-                for(int i = 0; i<newStoredString.length-1;++i){
-                    if(!newStoredString[i].equals(newStoredString[i+1])){
-                        countLength+=1;
-                    }
-                }
-                System.out.println("length: " + countLength);
-                String[] titles = new String[countLength];
-                int[] countInteraction = new int[countLength];
-                int index = 0;
-                titles[0] = newStoredString[0];
-                for(int i = 0; i<newStoredString.length-1; ++i){
-                    if(!newStoredString[i].equals(newStoredString[i+1])){
-                        index +=1;
-                        titles[index] = newStoredString[i+1];
-                    }
-                }
-                for(int i = 0; i<countLength;++i){
-                    int count = 0;
-                    for(int j = 0; j<newStoredString.length;++j){
-                        if(titles[i].equals(newStoredString[j])){
-                            count+=1;
-                        }
-                    }
-                    countInteraction[i] = count;
-                }
-                Calendar calendarStartdate = Calendar.getInstance();
-                calendarStartdate.setTime(startDate);
-
-                Calendar calendarEnddate = Calendar.getInstance();
-                calendarEnddate.setTime(endDate);
-
-                System.out.print("input" + " " + ":" + " " + arrayOfMonthsTranslation[calendarStartdate.get(Calendar.MONTH)] + " " + calendarStartdate.get(Calendar.YEAR) + " " + "-" + " " + arrayOfMonthsTranslation[calendarEnddate.get(Calendar.MONTH)] + " " + calendarEnddate.get(Calendar.YEAR));
-
-
-                System.out.print('\n');
-                for(int i = 0; i < titles.length; ++i ){
-                    System.out.printf("%20s", titles[i]);
-                }
-                System.out.printf("%n");
-                for(int i = 0; i < countInteraction.length; ++i){
-                    System.out.printf("%20s",countInteraction[i]);
-                }
-                System.out.printf("%n");
-                fileReading.close();
 
             }
-            else{
-                fileReading.close();
-                throw new Exception();
+            fileReading.close();
+        }catch (Exception exception){
 
+        }
+        String testCase = "lead_001";
+        try{
+            for(Interaction interaction: listOfInteraction){
+                System.out.println(interaction.getStringCode());
             }
         }catch (Exception e){
-            System.out.println(e.getMessage());
+
         }
     }
 }

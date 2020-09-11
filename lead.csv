@@ -1,2 +1,4 @@
 stringCode,name,birthDate,gender,phone,email,address
-lead_001,bell,2000-1-1,false,123,gaml@gmal.com,702 NVL
+lead_001,dat,2000-11-22,true,123,glm@mdas.com,230 NVl
+lead_002,dat,2000-11-22,true,123,glm@mdas.com,230 NVl
+lead_003,dat,2000-11-22,true,123,glm@mdas.com,230 NVl

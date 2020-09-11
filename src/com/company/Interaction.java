@@ -70,10 +70,12 @@ public class Interaction implements interfacesOfInteraction {
     public String getStatus() {
         return status;
     }
+    String interactionTitle = "codeString,date,stringCodeOfLead,mean,status";
+
+
+    /**This method is used to fill the interaction in the interaction objects array into a interaction.csv file or create new file if it is not exist. */
 
     public void fillList() throws Exception {
-
-        String interactionTitle = "codeString,date,stringCodeofLead,mean,status";
 
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(this.date);
@@ -127,6 +129,7 @@ public class Interaction implements interfacesOfInteraction {
         }
     }
 
+    /**This method will print out the the object with in the interaction object arrays*/
 
     @Override
     public void view(Interaction[] interactions) {
@@ -149,10 +152,10 @@ public class Interaction implements interfacesOfInteraction {
         Interaction interaction = new Interaction();
         interaction.view(interactions);
     }
+    /**This method rewrite all objects into a new interaction.csv file except the interaction object which have the interId same with the input */
 
     @Override
     public void delete(Interaction[] interactions, String stringCode) {
-        String interactionTitle = "codeString,date,stringCodeofLead,mean,status";
         try {
             FileWriter fileWriter = new FileWriter("interaction.csv");
             fileWriter.write(interactionTitle);
@@ -191,10 +194,10 @@ public class Interaction implements interfacesOfInteraction {
         interaction.delete(interactions, stringCode);
     }
 
+    /** This method rewrite the interaction.csv file based on the input we make in Main which is update function*/
+
     @Override
     public void write(Interaction[] interactions) {
-        String interactionTitle = "codeString,date,stringCodeofLead,mean,status";
-
         try {
             FileWriter fileWriter = new FileWriter("interaction.csv");
             fileWriter.write(interactionTitle);
@@ -223,5 +226,44 @@ public class Interaction implements interfacesOfInteraction {
     public static void writeInteraction(Interaction[] interactions){
         Interaction interaction = new Interaction();
         interaction.write(interactions);
+    }
+
+    @Override
+    public void deleteByLeadId(Interaction[] interactions, String leadCode) {
+        try {
+            FileWriter fileWriter = new FileWriter("interaction.csv");
+            fileWriter.write(interactionTitle);
+            fileWriter.write('\n');
+            for (Interaction interaction: interactions){
+                Calendar calendar = Calendar.getInstance();
+                calendar.setTime(interaction.getDate());
+                if(interaction.getLead().getCodeString().equals(leadCode)){
+
+                }
+                else {
+                    fileWriter.write(interaction.getStringCode());
+                    fileWriter.write(',');
+                    fileWriter.write(calendar.get(Calendar.YEAR)+"-"+(calendar.get(Calendar.MONTH)+1)+"-"+calendar.get(Calendar.DATE));
+                    fileWriter.write(',');
+                    fileWriter.write(interaction.getLead().getCodeString());
+                    fileWriter.write(',');
+                    fileWriter.write(interaction.getMean());
+                    fileWriter.write(',');
+                    fileWriter.write(interaction.getStatus());
+                    fileWriter.write('\n');
+                }
+            }
+            fileWriter.close();
+
+
+
+        }
+        catch (IOException ioException){
+
+        }
+    }
+    public static void writeDeleteByLeadId(Interaction[] interactions, String leadCode){
+        Interaction interaction = new Interaction();
+        interaction.deleteByLeadId(interactions, leadCode);
     }
 }

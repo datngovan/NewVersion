@@ -92,14 +92,11 @@ public class Lead implements interfacesOfLead {
         return address;
     }
 
+    String leadTitle = "stringCode,name,birthDate,gender,phone,email,address";
 
 
-
+    /**This method will fill the the lead.csv file after any change is made*/
     public void fillList() throws Exception {
-
-        String leadTitle = "stringCode,name,birthdate,gender,phone,email,address";
-
-
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(this.birthdate);
 
@@ -157,6 +154,7 @@ public class Lead implements interfacesOfLead {
         }
     }
 
+    /**This method prints out the leads in the lead objects array. */
 
     @Override
     public void view(Lead[] leads) {
@@ -183,10 +181,10 @@ public class Lead implements interfacesOfLead {
         Lead lead = new Lead();
         lead.view(leads);
     }
+    /**This method writes all the leads in the lead objects array into a new lead.csv file except the lead object have the id same with codeString. */
 
     @Override
     public void delete(Lead[] leads, String codeString) {
-        String leadTitle = "stringCode,name,birthdate,gender,phone,email,address";
         try {
             FileWriter fileWriter = new FileWriter("lead.csv");
             fileWriter.write(leadTitle);
@@ -227,9 +225,9 @@ public class Lead implements interfacesOfLead {
         lead.delete(leads, codeString);
     }
 
+    /** This method rewrites the lead.csv file based on the input we make in Main which is update function*/
     @Override
     public void write(Lead[] leads) {
-        String leadTitle = "stringCode,name,birthdate,gender,phone,email,address";
         try {
             FileWriter fileWriter = new FileWriter("lead.csv");
             fileWriter.write(leadTitle);

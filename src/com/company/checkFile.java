@@ -9,7 +9,7 @@ public class checkFile {
         int numberOfLines = 0;
         boolean check = false;
         try{
-            Scanner fileReading = new Scanner(new File("lead.csv"));
+            Scanner fileReading = new Scanner(new File(pathName));
 
             while (fileReading.hasNext()){
                 String eachLine = fileReading.nextLine();
@@ -32,7 +32,7 @@ public class checkFile {
         int numberOfLines = 0;
         boolean check = false;
         try{
-            Scanner fileReading = new Scanner(new File("lead.csv"));
+            Scanner fileReading = new Scanner(new File(pathName));
 
             while (fileReading.hasNext()){
                 String eachLine = fileReading.nextLine();

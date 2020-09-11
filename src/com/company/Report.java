@@ -11,6 +11,8 @@ import java.util.Scanner;
 public class Report implements interfacesOfReport {
     String leadTitle = "stringCode,name,birthDate,gender,phone,email,address";
     String interactionTitle = "codeString,date,stringCodeOfLead,mean,status";
+    String[] arrayOfMonthsTranslation = {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
+
 
     @Override
     public void viewLeads() {
@@ -144,7 +146,6 @@ public class Report implements interfacesOfReport {
             String interactionTitle = "codeString,date,stringCodeOfLead,mean,status";
             Scanner sc = new Scanner(System.in);
             SimpleDateFormat getFormat = new SimpleDateFormat("yyyy-MM-dd");
-            String[] arrayOfMonthsTranslation = {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
             try{
                 Scanner fileReading = new Scanner(new File("interaction.csv"));
                 System.out.println("Input the start date: ");

@@ -65,8 +65,8 @@ public class Themenu {
 
                 while (true){
 
-                    String leadTitle = "stringCode,name,birthdate,gender,phone,email,address";
-                    String interactionTitle = "codeString,date,stringCodeofLead,mean,status";
+                    String leadTitle = "stringCode,name,birthDate,gender,phone,email,address";
+                    String interactionTitle = "codeString,date,stringCodeOfLead,mean,status";
                     int lengthOfarray = 0;
                     boolean isThereaList = false;
                     try{
@@ -137,6 +137,7 @@ public class Themenu {
                         lengthOfarray1 = lengthOfarray1 + 1;
                     }
                     Interaction[] listOfinteraction = new Interaction[lengthOfarray1 - 1];
+                    System.out.println(lengthOfarray1);
                     int index2 = 0;
 
                     try{
@@ -654,8 +655,8 @@ public class Themenu {
                     while (true){
 
 
-                        String leadTitle = "stringCode,name,birthdate,gender,phone,email,address";
-                        String interactionTitle = "codeString,date,stringCodeofLead,mean,status";
+                        String leadTitle = "stringCode,name,birthDate,gender,phone,email,address";
+                        String interactionTitle = "codeString,date,stringCodeOfLead,mean,status";
                         int lengthOfarray1 = 0;
                         boolean isThereaList1 = false;
                         try{
@@ -1174,8 +1175,8 @@ public class Themenu {
                 if(isLeadinformationAdded){
                     while(true){
 
-                        String leadTitle = "stringCode,name,birthdate,gender,phone,email,address";
-                        String interactionTitle = "codeString,date,stringCodeofLead,mean,status";
+                        String leadTitle = "stringCode,name,birthDate,gender,phone,email,address";
+                        String interactionTitle = "codeString,date,stringCodeOfLead,mean,status";
                         boolean isInteractioninformationAdded = false;
                         int countLines = 0;
                         try {
