@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.sql.SQLOutput;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
@@ -281,55 +282,45 @@ public class Main {
                                     }
                                 }
                                 if (isCodestringAdded){
-                                    Lead.deleteLead(listOfLeads, readingCodestringInput);
-
                                     if(interactionListExist){
-                                        System.out.println("Do you want to delete all the interactions of this lead");
-                                        System.out.println("Please enter yes if you want to");
-                                        String input = sc.nextLine();
-                                        String inputSanitized = input.toLowerCase().trim();
-                                        if(inputSanitized.equals("yes")){
-                                            try {
-                                                FileWriter fileWriter = new FileWriter("interaction.csv");
-                                                fileWriter.write(interactionTitle);
-                                                fileWriter.write('\n');
-                                                for (Interaction interaction: listOfInteraction){
-                                                    Calendar calendar = Calendar.getInstance();
-                                                    calendar.setTime(interaction.getDate());
-                                                    if(interaction.getLead().getCodeString().equals(readingCodestringInput)){
-
-                                                    }
-                                                    else {
-                                                        fileWriter.write(interaction.getStringCode());
-                                                        fileWriter.write(',');
-                                                        fileWriter.write(calendar.get(Calendar.YEAR)+"-"+(calendar.get(Calendar.MONTH)+1)+"-"+calendar.get(Calendar.DATE));
-                                                        fileWriter.write(',');
-                                                        fileWriter.write(interaction.getLead().getCodeString());
-                                                        fileWriter.write(',');
-                                                        fileWriter.write(interaction.getMean());
-                                                        fileWriter.write(',');
-                                                        fileWriter.write(interaction.getStatus());
-                                                        fileWriter.write('\n');
-                                                    }
-                                                    System.out.print("testing");
-
+                                        boolean isEquals = false;
+                                        for(Interaction interaction: listOfInteraction){
+                                            if(readingCodestringInput.toLowerCase().trim().equals(interaction.getLead().getCodeString())){
+                                                isEquals = true;
+                                            }
+                                        }
+                                        if(isEquals){
+                                            while (true){
+                                                System.out.println("This lead has been involved with 1 or more interactions");
+                                                System.out.println("Yes");
+                                                System.out.println("No");
+                                                System.out.println("Type yes to delete the lead and its relative interactions or no to stop this process.");
+                                                String inputDelete = sc.nextLine();
+                                                String inputDeleteSanitized = inputDelete.toLowerCase().trim();
+                                                if(inputDeleteSanitized.equals("yes")){
+                                                    Lead.deleteLead(listOfLeads,readingCodestringInput);
+                                                    Interaction.writeDeleteByLeadId(listOfInteraction,readingCodestringInput);
+                                                    System.out.println("Successful");
+                                                    break;
+                                                }else if(inputDeleteSanitized.equals("no")){
+                                                    System.out.println("Successful");
+                                                    break;
+                                                }else{
+                                                    continue;
                                                 }
-                                                fileWriter.close();
-
-
 
                                             }
-                                            catch (IOException ioException){
-
-                                            }
-                                        }else if(inputSanitized.equals("no")){
                                             break;
                                         }else{
-
+                                            Lead.deleteLead(listOfLeads, readingCodestringInput);
+                                            System.out.print("Successful");
+                                            break;
                                         }
+                                    }else{
+                                        Lead.deleteLead(listOfLeads, readingCodestringInput);
+                                        System.out.print("Successful");
+                                        break;
                                     }
-                                    System.out.print("Successful");
-                                    break;
                                 }
                                 System.out.print("codeString is not in the file or has not added");
 
