@@ -78,12 +78,22 @@ public class Report implements interfacesOfReport {
                 Scanner fileReading = new Scanner(new File("interaction.csv"));
                 System.out.println("Input the start date: ");
                 String readStartedDateInput = sc.nextLine();
-                Date startDate = getFormat.parse(readStartedDateInput);
+                Date startDate = new Date();
+                if(Integer.parseInt(readStartedDateInput.split("-")[2]) <= 31 && Integer.parseInt(readStartedDateInput.split("-")[1]) <= 12){
+                    startDate = getFormat.parse(readStartedDateInput);
+                }else{
+                    throw new Exception("startDate input is invalid\n");
+                }
                 System.out.println("Input the end date: ");
                 String readEndedDateInput = sc.nextLine();
-                Date endDate = getFormat.parse(readEndedDateInput);
+                Date endDate = new Date();
+                if(Integer.parseInt(readEndedDateInput.split("-")[2]) <= 31 && Integer.parseInt(readEndedDateInput.split("-")[1]) <= 12){
+                    endDate = getFormat.parse(readEndedDateInput);
+                }else{
+                    throw new Exception("endtDate input is invalid\n");
+                }
                 Date now = new Date();
-                if(startDate.compareTo(endDate)<=0){
+                if(startDate.compareTo(endDate)<=0 && endDate.compareTo(now)<=0){
                     while (fileReading.hasNext()){
                         String eachLine = fileReading.nextLine();
                         if(eachLine.equals(interactionTitle)){
@@ -150,10 +160,20 @@ public class Report implements interfacesOfReport {
                 Scanner fileReading = new Scanner(new File("interaction.csv"));
                 System.out.println("Input the start date: ");
                 String readStartedDateInput = sc.nextLine();
-                Date startDate = getFormat.parse(readStartedDateInput);
+                Date startDate = new Date();
+                if(Integer.parseInt(readStartedDateInput.split("-")[2]) <= 31 && Integer.parseInt(readStartedDateInput.split("-")[1]) <= 12){
+                    startDate = getFormat.parse(readStartedDateInput);
+                }else{
+                    throw new Exception("startDate input is invalid \n");
+                }
                 System.out.println("Input the end date: ");
                 String readEndedDateInput = sc.nextLine();
-                Date endDate = getFormat.parse(readEndedDateInput);
+                Date endDate = new Date();
+                if(Integer.parseInt(readEndedDateInput.split("-")[2]) <= 31 && Integer.parseInt(readEndedDateInput.split("-")[1]) <= 12){
+                    endDate = getFormat.parse(readEndedDateInput);
+                }else{
+                    throw new Exception("endDate input is invalid \n");
+                }
                 Date now = new Date();
                 if(startDate.compareTo(endDate)<=0 && endDate.compareTo(now)<=0){
                     String storedString = "";
