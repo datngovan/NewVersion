@@ -34,7 +34,8 @@ public class Main {
             System.out.print('\n');
             System.out.print("- Check the three reports taken from lead and interaction information");
             System.out.print('\n');
-            System.out.print("Type lead for managing lead information, interaction for managing interaction information, report for checking the reports or exit for stopping");
+            System.out.print("Type lead for function 1, interaction for function 2, report for function 3 or exit for stopping");
+            System.out.print('\n');
 
             String readMainMenuInput = sc.nextLine();
             String readMainMenuInputSanitized = readMainMenuInput.toLowerCase().trim();
@@ -121,7 +122,8 @@ public class Main {
                     System.out.print('\n');
                     System.out.print("- Update lead detail");
                     System.out.print("\n");
-                    System.out.print("Type view for viewing, add for adding, delete for deleting, update for updating and exit for stopping");
+                    System.out.print("Type view for function 1, add for function 2, delete for function 3, update for function 4 and exit for stopping");
+                    System.out.print('\n');
 
                     String readLeadInput = sc.nextLine();
                     String readLeadInputSanitized = readLeadInput.toLowerCase().trim();
@@ -184,6 +186,10 @@ public class Main {
 
                                 System.out.print('\n');
                                 System.out.print("Input your name" + " ");
+                                System.out.print('\n');
+                                System.out.print("For example: anna");
+                                System.out.print('\n');
+                                System.out.print("(Numbers or special characters are invalid)" + " ");
                                 String leadName = input.nextLine();
 
                                 for (char eachCharacter: leadName.toLowerCase().trim().toCharArray()){
@@ -194,6 +200,10 @@ public class Main {
 
 
                                 System.out.print("Input your birthDate" + " ");
+                                System.out.print('\n');
+                                System.out.print("For example: 2000-07-05");
+                                System.out.print('\n');
+                                System.out.print("(Please follow the pattern yyyy-MM-dd)" + " ");
                                 String leadBirthDate = input.nextLine();
                                 SimpleDateFormat getFormat = new SimpleDateFormat("yyyy-MM-dd");
                                 Date date = getFormat.parse(leadBirthDate);
@@ -214,9 +224,13 @@ public class Main {
 
 
                                 System.out.print("Input your phone" + " ");
+                                System.out.print('\n');
+                                System.out.print("For example: 0946576795");
+                                System.out.print('\n');
+                                System.out.print("(Only 10 numbers are allowed)" + " ");
                                 String leadPhone = input.nextLine();
 
-                                Pattern patternOfPhone = Pattern.compile("[0-9 ]+");
+                                Pattern patternOfPhone = Pattern.compile("[0-9]{10}");
                                 Matcher phoneMatcher = patternOfPhone.matcher(leadPhone);
                                 if (!phoneMatcher.matches()){
 
@@ -228,6 +242,10 @@ public class Main {
 
 
                                 System.out.print("Input your email" + " ");
+                                System.out.print('\n');
+                                System.out.print("For example: anna@gmail.com or anna@rmit.edu.vn");
+                                System.out.print('\n');
+                                System.out.print("(Please follow the pattern)" + " ");
                                 String leadEmail = input.nextLine();
 
                                 Pattern patternOfEmail=  Pattern.compile("([a-zA-Z0-9]*[@][a-zA-Z]*[.][a-zA-Z]*)|([a-zA-Z0-9]*[@][a-zA-Z]*[.][a-zA-Z]*[.][a-zA-Z]*)");
@@ -240,6 +258,10 @@ public class Main {
 
 
                                 System.out.print("Input your address" + " ");
+                                System.out.print('\n');
+                                System.out.print("For example: 702 Nguyen Van Linh");
+                                System.out.print('\n');
+                                System.out.print("(Please follow the pattern)" + " ");
                                 String leadAddress = input.nextLine();
                                 Pattern patternOfAddress = Pattern.compile("[a-zA-Z0-9/ ]*");
                                 Matcher addressMatcher = patternOfAddress.matcher(leadAddress);
@@ -251,10 +273,18 @@ public class Main {
 
 
                                 System.out.print("Input your gender" + " ");
+                                System.out.print('\n');
+                                System.out.print("For example: true");
+                                System.out.print('\n');
+                                System.out.print("(True for female and false for male)" + " ");
                                 boolean leadGender = input.nextBoolean();
                                 Lead lead = new Lead(codeString, leadName, date,leadGender,leadPhone, leadEmail, leadAddress);
                                 lead.fillList();
 
+                            }
+                            catch (ParseException parseException){
+                                System.out.print("birthdate input is invalid");
+                                continue;
                             }
                             catch (Exception exception){
                                 System.out.print(exception.getMessage());
@@ -273,6 +303,10 @@ public class Main {
                             while (true){
                                 System.out.print('\n');
                                 System.out.print("codeString" + " ");
+                                System.out.print('\n');
+                                System.out.print("For example: lead_001");
+                                System.out.print('\n');
+                                System.out.print("(Please follow the pattern lead_nnn)" + " ");
                                 Scanner codeStringinput = new Scanner(System.in);
                                 String readingCodestringInput = codeStringinput.nextLine();
                                 boolean isCodestringAdded = false;
@@ -306,6 +340,7 @@ public class Main {
                                                     System.out.println("Successful");
                                                     break;
                                                 }else{
+                                                    System.out.print("invalid input");
                                                     continue;
                                                 }
 
@@ -340,6 +375,10 @@ public class Main {
                             while(true){
                                 System.out.print('\n');
                                 System.out.print("codeString" + " ");
+                                System.out.print('\n');
+                                System.out.print("For example: lead_001");
+                                System.out.print('\n');
+                                System.out.print("(Please follow the pattern lead_nnn)" + " ");
                                 Scanner codeStringinput = new Scanner(System.in);
                                 String readingCodestringInput = codeStringinput.nextLine();
                                 boolean isCodestringAdded = false;
@@ -361,24 +400,28 @@ public class Main {
                                     while (true){
                                         System.out.print('\n');
                                         System.out.print("information section" + " ");
+                                        System.out.print('\n');
+                                        System.out.print("(name, birthdate, gender, phone, email and address)" + " ");
                                         Scanner informationSectioninput = new Scanner(System.in);
                                         String readingInformationsectionInput = informationSectioninput.nextLine();
                                         Scanner newUpdateinput = new Scanner(System.in);
                                         String readingInformationsectionInputsanitized = readingInformationsectionInput.toLowerCase().trim();
                                         if(readingInformationsectionInputsanitized.equals("name")){
                                             while (true){
+                                                System.out.print('\n');
                                                 System.out.print("new update" + " ");
+                                                System.out.print('\n');
+                                                System.out.print("For example: anna");
+                                                System.out.print('\n');
+                                                System.out.print("(Numbers or special characters are invalid)" + " ");
                                                 String readingNewupdateInput = newUpdateinput.nextLine();
-                                                String readingNewupdateInputsanitized = readLeadInputSanitized.toLowerCase().trim();
+                                                String readingNewupdateInputsanitized = readingNewupdateInput.toLowerCase().trim();
                                                 try {
 
-                                                    Pattern patternOfname = Pattern.compile("[a-z ]+");
-                                                    Matcher nameMatcher = patternOfname.matcher(readingNewupdateInputsanitized);
-                                                    if (nameMatcher.matches()){
-
-                                                    }
-                                                    else {
-                                                        throw new IllegalArgumentException("name input is invalid");
+                                                    for (char eachCharacter: readingNewupdateInputsanitized.toCharArray()){
+                                                        if ( (eachCharacter<97 && eachCharacter!=' ') ||( eachCharacter>97+26 && eachCharacter != ' ' )){
+                                                            throw new IllegalArgumentException("Name input is invalid");
+                                                        }
                                                     }
 
                                                 }
@@ -392,7 +435,12 @@ public class Main {
                                         }
                                         else if(readingInformationsectionInputsanitized.equals("birthdate")){
                                             while (true){
+                                                System.out.print('\n');
                                                 System.out.print("new update" + " ");
+                                                System.out.print('\n');
+                                                System.out.print("For example: 2000-07-05");
+                                                System.out.print('\n');
+                                                System.out.print("(Please follow the pattern)" + " ");
                                                 String readingNewupdateInput = newUpdateinput.nextLine();
                                                 Date date = new Date();
                                                 try {
@@ -412,6 +460,10 @@ public class Main {
                                                         }
                                                     }
                                                 }
+                                                catch (ParseException parseException){
+                                                    System.out.print("birthdate input is invalid");
+                                                    continue;
+                                                }
                                                 catch (Exception exception){
                                                     System.out.print(exception.getMessage());
                                                     continue;
@@ -425,14 +477,21 @@ public class Main {
                                         else if(readingInformationsectionInputsanitized.equals("gender")){
                                             while (true){
 
+                                                Scanner newUpdateinputBoolean = new Scanner(System.in);
+
 
                                                 try {
+                                                    System.out.print('\n');
                                                     System.out.print("new update" + " ");
-                                                    boolean readingNewupdateInput = newUpdateinput.nextBoolean();
-                                                    listOfLeads[secondIndex].setGender(readingNewupdateInput);
+                                                    System.out.print('\n');
+                                                    System.out.print("For example: true");
+                                                    System.out.print('\n');
+                                                    System.out.print("(True for female and false for male)" + " ");
+                                                    boolean readingNewupdateInputboolean = newUpdateinputBoolean.nextBoolean();
+                                                    listOfLeads[secondIndex].setGender(readingNewupdateInputboolean);
                                                 }
-                                                catch (IllegalArgumentException illegalArgumentexception){
-                                                    System.out.print(illegalArgumentexception.getMessage());
+                                                catch (Exception exception){
+                                                    System.out.print(exception.getMessage());
                                                     continue;
                                                 }
 
@@ -442,11 +501,16 @@ public class Main {
                                         }
                                         else if(readingInformationsectionInputsanitized.equals("phone")){
                                             while (true){
+                                                System.out.print('\n');
                                                 System.out.print("new update" + " ");
+                                                System.out.print('\n');
+                                                System.out.print("For example: 0946576795");
+                                                System.out.print('\n');
+                                                System.out.print("(Only 10 numbers are allowed)" + " ");
                                                 String readingNewupdateInput = newUpdateinput.nextLine();
                                                 String readingNewupdateInputsanitized = readingNewupdateInput.toLowerCase().trim();
                                                 try {
-                                                    Pattern patternOfphone = Pattern.compile("[0-9 ]+");
+                                                    Pattern patternOfphone = Pattern.compile("[0-9]{10}");
                                                     Matcher phoneMatcher = patternOfphone.matcher(readingNewupdateInput);
                                                     if (!phoneMatcher.matches()){
                                                         throw new IllegalArgumentException("phone input is invalid");
@@ -462,7 +526,12 @@ public class Main {
                                         }
                                         else if(readingInformationsectionInputsanitized.equals("email")){
                                             while (true){
+                                                System.out.print('\n');
                                                 System.out.print("new update" + " ");
+                                                System.out.print('\n');
+                                                System.out.print("For example: anna@gmail.com or anna@rmit.edu.vn");
+                                                System.out.print('\n');
+                                                System.out.print("(Please follow the pattern)" + " ");
                                                 String readingNewupdateInput = newUpdateinput.nextLine();
                                                 try {
                                                     Pattern patternOfEmail=  Pattern.compile("([a-zA-Z0-9]*[@][a-zA-Z]*[.][a-zA-Z]*)|([a-zA-Z0-9]*[@][a-zA-Z]*[.][a-zA-Z]*[.][a-zA-Z]*)");
@@ -484,7 +553,12 @@ public class Main {
 
                                         else if(readingInformationsectionInputsanitized.equals("address")){
                                             while (true){
+                                                System.out.print('\n');
                                                 System.out.print("new update" + " ");
+                                                System.out.print('\n');
+                                                System.out.print("For example: 702 Nguyen Van Linh");
+                                                System.out.print('\n');
+                                                System.out.print("(Please follow the pattern)" + " ");
                                                 String readingNewupdateInput = newUpdateinput.nextLine();
 
                                                 try {
@@ -515,6 +589,7 @@ public class Main {
                                     }
 
                                     Lead.writeLead(listOfLeads);
+                                    System.out.print("Successful");
 
                                     break;
                                 }
@@ -532,6 +607,7 @@ public class Main {
                         break;
                     }
                     else {
+                        System.out.print("invalid input");
                         continue;
                     }
                 }
@@ -620,7 +696,8 @@ public class Main {
                         System.out.print('\n');
                         System.out.print("- Update interaction detail");
                         System.out.print("\n");
-                        System.out.print("Type view for viewing, add for adding, delete for deleting, update for updating and exit for stopping");
+                        System.out.print("Type view for function 1, add for function 2, delete for function 3, update for function 4 and exit for stopping");
+                        System.out.print('\n');
 
                         String readInteractionInput = sc.nextLine();
                         String readInteractionInputSanitized = readInteractionInput.toLowerCase().trim();
@@ -684,6 +761,10 @@ public class Main {
 
                                     System.out.print('\n');
                                     System.out.print("input the date" + " ");
+                                    System.out.print('\n');
+                                    System.out.print("For example: 2000-07-05");
+                                    System.out.print('\n');
+                                    System.out.print("(Please follow the pattern yyyy-MM-dd)" + " ");
                                     String interactionDate = input.nextLine();
                                     SimpleDateFormat getFormat = new SimpleDateFormat("yyyy-MM-dd");
                                     Date date = getFormat.parse(interactionDate);
@@ -705,6 +786,10 @@ public class Main {
 
 
                                     System.out.print("input codeString of the lead" + " ");
+                                    System.out.print('\n');
+                                    System.out.print("For example: lead_001");
+                                    System.out.print('\n');
+                                    System.out.print("(Please follow the pattern lead_nnn)" + " ");
                                     String interactionLead = input.nextLine();
                                     boolean isStringcodeOfleadNotadded = true;
                                     try{
@@ -740,7 +825,9 @@ public class Main {
 
                                     System.out.print("input the mean" + " ");
                                     System.out.print('\n');
-                                    System.out.print("face to face, message, socialmedia or facebook" + " ");
+                                    System.out.print("For example: face-to-face");
+                                    System.out.print('\n');
+                                    System.out.print("(face to face, message, socialmedia or facebook)" + " ");
                                     String interactionMean = input.nextLine();
                                     String interactionMeansanitized = interactionMean.trim().toLowerCase();
                                     if(!(interactionMeansanitized.equals("ftf")||interactionMeansanitized.equals("facetoface")||interactionMeansanitized.equals("face-to-face")||interactionMeansanitized.equals("message")||interactionMeansanitized.equals("socialmedia")||interactionMeansanitized.equals("facebook"))){
@@ -752,7 +839,9 @@ public class Main {
 
                                     System.out.print("input the status");
                                     System.out.print('\n');
-                                    System.out.print("neutral, negative or positive" + " ");
+                                    System.out.print("For example: neutral");
+                                    System.out.print('\n');
+                                    System.out.print("(neutral, negative or positive)" + " ");
                                     String interactionStatus = input.nextLine();
                                     if (interactionStatus.trim().toLowerCase().equals("neutral")||interactionStatus.trim().toLowerCase().equals("negative")||interactionStatus.trim().toLowerCase().equals("positive")){
 
@@ -788,6 +877,10 @@ public class Main {
                                 while (true){
                                     System.out.print('\n');
                                     System.out.print("codeString" + " ");
+                                    System.out.print('\n');
+                                    System.out.print("For example: inter_001");
+                                    System.out.print('\n');
+                                    System.out.print("(Please follow the pattern inter_nnn)" + " ");
                                     Scanner codeStringinput = new Scanner(System.in);
                                     String readingCodestringInput = codeStringinput.nextLine();
                                     boolean isCodestringAdded = false;
@@ -820,6 +913,10 @@ public class Main {
                                 while(true){
                                     System.out.print('\n');
                                     System.out.print("codeString" + " ");
+                                    System.out.print('\n');
+                                    System.out.print("For example: inter_001");
+                                    System.out.print('\n');
+                                    System.out.print("(Please follow the pattern inter_nnn)" + " ");
                                     Scanner codeStringinput = new Scanner(System.in);
                                     String readingCodestringInput = codeStringinput.nextLine();
                                     boolean isCodestringAdded = false;
@@ -840,6 +937,9 @@ public class Main {
                                         while (true){
                                             System.out.print('\n');
                                             System.out.print("information section" + " ");
+                                            System.out.print('\n');
+                                            System.out.print("(date, lead, mean and status)" + " ");
+
                                             Scanner informationSectioninput = new Scanner(System.in);
                                             String readingInformationsectionInput = informationSectioninput.nextLine();
                                             Scanner newUpdateinput = new Scanner(System.in);
@@ -847,7 +947,12 @@ public class Main {
                                             if (readingInformationsectionInputsanitized.equals("date")){
                                                 while (true){
 
+                                                    System.out.print('\n');
                                                     System.out.print("new update" + " ");
+                                                    System.out.print('\n');
+                                                    System.out.print("For example: 2000-07-05");
+                                                    System.out.print('\n');
+                                                    System.out.print("(Please follow the pattern yyyy-MM-dd)" + " ");
                                                     String readingNewupdateInput = newUpdateinput.nextLine();
                                                     Date date = new Date();
                                                     try {
@@ -867,6 +972,10 @@ public class Main {
                                                             }
                                                         }
                                                     }
+                                                    catch (ParseException parseException){
+                                                        System.out.print("interactionDate input is invalid");
+                                                        continue;
+                                                    }
                                                     catch (Exception exception){
                                                         System.out.print(exception.getMessage());
                                                         continue;
@@ -877,8 +986,12 @@ public class Main {
                                             }
                                             else if(readingInformationsectionInputsanitized.equals("lead")){
                                                 while (true){
-
+                                                    System.out.print('\n');
                                                     System.out.print("new update" + " ");
+                                                    System.out.print('\n');
+                                                    System.out.print("For example: lead_001");
+                                                    System.out.print('\n');
+                                                    System.out.print("(Please follow the pattern lead_nnn)" + " ");
                                                     String readingNewupdateInput = newUpdateinput.nextLine();
 
                                                     try {
@@ -931,8 +1044,12 @@ public class Main {
                                             }
                                             else if(readingInformationsectionInputsanitized.equals("mean")){
                                                 while (true){
-
+                                                    System.out.print('\n');
                                                     System.out.print("new update" + " ");
+                                                    System.out.print('\n');
+                                                    System.out.print("For example: face-to-face");
+                                                    System.out.print('\n');
+                                                    System.out.print("(face to face, message, socialmedia or facebook)" + " ");
                                                     String readingNewupdateInput = newUpdateinput.nextLine();
                                                     String readingNewupdateInputsanitized = readingNewupdateInput.toLowerCase().trim();
                                                     try {
@@ -950,8 +1067,12 @@ public class Main {
                                             }
                                             else if(readingInformationsectionInputsanitized.equals("status")){
                                                 while (true){
-
+                                                    System.out.print('\n');
                                                     System.out.print("new update" + " ");
+                                                    System.out.print('\n');
+                                                    System.out.print("For example: neutral");
+                                                    System.out.print('\n');
+                                                    System.out.print("(neutral, negative or positive)" + " ");
                                                     String readingNewupdateInput = newUpdateinput.nextLine();
                                                     String readingNewupdateInputsanitized = readingNewupdateInput.toLowerCase().trim();
                                                     try {
@@ -968,6 +1089,7 @@ public class Main {
                                                 }
                                             }
                                             else {
+                                                System.out.print("section input is not in the system");
                                                 continue;
                                             }
                                             break;
@@ -989,6 +1111,7 @@ public class Main {
                             break;
                         }
                         else {
+                            System.out.print("invalid input");
                             continue;
                         }
                     }
@@ -1005,6 +1128,7 @@ public class Main {
                     while (true){
                         boolean interactionInformationIsAdded = checker.getBoolean("interaction.csv");
                         Scanner functionInput = new Scanner(System.in);
+                        System.out.print('\n');
                         System.out.print("Welcome to CRM");
                         System.out.print('\n');
                         System.out.print("- View the report of the lead number by age");
@@ -1013,14 +1137,15 @@ public class Main {
                         System.out.print('\n');
                         System.out.print("- View the report of the interaction number by date ");
                         System.out.print('\n');
-                        System.out.print("Type view lead for viewing the lead number, view status for viewing the interaction number of different status, view interaction for viewing the interaction number or exit for stopping");
+                        System.out.print("Type view age for function 1, view status for function 2, view interaction for function 3 or exit for stopping");
+                        System.out.print('\n');
                         String readReportInput = functionInput.nextLine();
                         String readReportInputSanitized = readReportInput.trim().toLowerCase();
 
                         /** Begin of the print leads function
                          * This function print out the numbers of leads in different age ranges */
 
-                        if(readReportInputSanitized.equals("view lead")){
+                        if(readReportInputSanitized.equals("view age")){
                             Report.printViewLeads();
                         }
                         /** Begin of the print status function
@@ -1052,6 +1177,7 @@ public class Main {
                             break;
                         }
                         else {
+                            System.out.print("invalid input");
                             continue;
                         }
                     }
@@ -1065,6 +1191,7 @@ public class Main {
                 break;
             }
             else {
+                System.out.print("invalid input");
                 continue;
             }
         }

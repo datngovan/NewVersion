@@ -56,6 +56,8 @@ public class Report implements interfacesOfReport {
 
             }
             fileReading.close();
+            System.out.print("input" + ":" + " " + "no input required");
+            System.out.print('\n');
             System.out.printf("%20s", "0-10  (years old)");
             System.out.printf("%20s", "10-20  (years old)");
             System.out.printf("%20s", "20-60  (years old)");
@@ -84,7 +86,11 @@ public class Report implements interfacesOfReport {
             String[] arrayOfMonthsTranslation = {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
             try{
                 Scanner fileReading = new Scanner(new File("interaction.csv"));
+                System.out.print('\n');
                 System.out.println("Input the start date: ");
+                System.out.print("For example: 2000-07-05");
+                System.out.print('\n');
+                System.out.print("(Please follow the pattern yyyy-MM-dd)" + " ");
                 String readStartedDateInput = sc.nextLine();
                 Date startDate = new Date();
                 if(Integer.parseInt(readStartedDateInput.split("-")[2]) <= 31 && Integer.parseInt(readStartedDateInput.split("-")[1]) <= 12){
@@ -93,12 +99,15 @@ public class Report implements interfacesOfReport {
                     throw new Exception("startDate input is invalid\n");
                 }
                 System.out.println("Input the end date: ");
+                System.out.print("For example: 2000-07-08");
+                System.out.print('\n');
+                System.out.print("(Please follow the pattern yyyy-MM-dd)" + " ");
                 String readEndedDateInput = sc.nextLine();
                 Date endDate = new Date();
                 if(Integer.parseInt(readEndedDateInput.split("-")[2]) <= 31 && Integer.parseInt(readEndedDateInput.split("-")[1]) <= 12){
                     endDate = getFormat.parse(readEndedDateInput);
                 }else{
-                    throw new Exception("endtDate input is invalid\n");
+                    throw new Exception("endDate input is invalid\n");
                 }
                 Date now = new Date();
                 if(startDate.compareTo(endDate)<=0 && endDate.compareTo(now)<=0){
@@ -127,7 +136,7 @@ public class Report implements interfacesOfReport {
                 }
                 else{
                     fileReading.close();
-                    throw new Exception();
+                    throw new Exception("Date input is invalid");
                 }
                 Calendar calendarStartdate = Calendar.getInstance();
                 calendarStartdate.setTime(startDate);
@@ -135,7 +144,7 @@ public class Report implements interfacesOfReport {
                 Calendar calendarEnddate = Calendar.getInstance();
                 calendarEnddate.setTime(endDate);
 
-                System.out.print("input" + " " + ":" + " " + arrayOfMonthsTranslation[calendarStartdate.get(Calendar.MONTH)] + " " + calendarStartdate.get(Calendar.YEAR) + " " + "-" + " " + arrayOfMonthsTranslation[calendarEnddate.get(Calendar.MONTH)] + " " + calendarEnddate.get(Calendar.YEAR));
+                System.out.print("input" + ":" + " " + calendarStartdate.get(Calendar.DATE) + " " + arrayOfMonthsTranslation[calendarStartdate.get(Calendar.MONTH)] + " " + calendarStartdate.get(Calendar.YEAR) + " " + "-" + " " + calendarEnddate.get(Calendar.DATE) + " " + arrayOfMonthsTranslation[calendarEnddate.get(Calendar.MONTH)] + " " + calendarEnddate.get(Calendar.YEAR));
                 System.out.print('\n');
                 System.out.printf("%20s","Positive");
                 System.out.printf("%20s","Neutral");
@@ -145,6 +154,10 @@ public class Report implements interfacesOfReport {
                 System.out.printf("%20s%n",countNegative);
 
 
+            }
+            catch (ArrayIndexOutOfBoundsException arrayIndexoutOfboundsException){
+                System.out.print("Date input is invalid");
+                continue;
             }
             catch (Exception exception){
                 System.out.print(exception.getMessage());
@@ -166,7 +179,11 @@ public class Report implements interfacesOfReport {
             SimpleDateFormat getFormat = new SimpleDateFormat("yyyy-MM-dd");
             try{
                 Scanner fileReading = new Scanner(new File("interaction.csv"));
+                System.out.print('\n');
                 System.out.println("Input the start date: ");
+                System.out.print("For example: 2000-07-05");
+                System.out.print('\n');
+                System.out.print("(Please follow the pattern yyyy-MM-dd)" + " ");
                 String readStartedDateInput = sc.nextLine();
                 Date startDate = new Date();
                 if(Integer.parseInt(readStartedDateInput.split("-")[2]) <= 31 && Integer.parseInt(readStartedDateInput.split("-")[1]) <= 12){
@@ -175,6 +192,9 @@ public class Report implements interfacesOfReport {
                     throw new Exception("startDate input is invalid \n");
                 }
                 System.out.println("Input the end date: ");
+                System.out.print("For example: 2000-07-08");
+                System.out.print('\n');
+                System.out.print("(Please follow the pattern yyyy-MM-dd)" + " ");
                 String readEndedDateInput = sc.nextLine();
                 Date endDate = new Date();
                 if(Integer.parseInt(readEndedDateInput.split("-")[2]) <= 31 && Integer.parseInt(readEndedDateInput.split("-")[1]) <= 12){
@@ -254,7 +274,7 @@ public class Report implements interfacesOfReport {
                     Calendar calendarEnddate = Calendar.getInstance();
                     calendarEnddate.setTime(endDate);
 
-                    System.out.print("input" + " " + ":" + " " + arrayOfMonthsTranslation[calendarStartdate.get(Calendar.MONTH)] + " " + calendarStartdate.get(Calendar.YEAR) + " " + "-" + " " + arrayOfMonthsTranslation[calendarEnddate.get(Calendar.MONTH)] + " " + calendarEnddate.get(Calendar.YEAR));
+                    System.out.print("input" + ":" + " " + calendarStartdate.get(Calendar.DATE) + " " + arrayOfMonthsTranslation[calendarStartdate.get(Calendar.MONTH)] + " " + calendarStartdate.get(Calendar.YEAR) + " " + "-" + " " + calendarEnddate.get(Calendar.DATE) + " " + arrayOfMonthsTranslation[calendarEnddate.get(Calendar.MONTH)] + " " + calendarEnddate.get(Calendar.YEAR));
 
 
                     System.out.print('\n');
@@ -271,9 +291,13 @@ public class Report implements interfacesOfReport {
                 }
                 else{
                     fileReading.close();
-                    throw new Exception();
+                    throw new Exception("Date input is invalid");
 
                 }
+            }
+            catch (ArrayIndexOutOfBoundsException arrayIndexoutOfboundsException){
+                System.out.print("Date input is invalid");
+                continue;
             }
             catch (Exception exception){
                 System.out.print(exception.getMessage());
