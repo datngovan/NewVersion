@@ -1,0 +1,8 @@
+codeString,date,stringCodeOfLead,mean,status
+inter_004,2011-5-1,lead_002,ftf,positive
+inter_005,2020-1-1,lead_003,ftf,negative
+inter_007,2011-12-13,lead_004,ftf,negative
+inter_008,2000-1-1,lead_005,ftf,positive
+inter_009,2011-1-1,lead_006,ftf,neutral
+inter_010,2011-1-1,lead_007,ftf,neutral
+inter_011,2012-12-1,lead_013,facebook,positive

@@ -1,0 +1,14 @@
+stringCode,name,birthDate,gender,phone,email,address
+lead_001,hau nguyen,1990-8-13,false,0123456789,hayNguyen@gmail.com,123 street 13
+lead_002,ngo van dat,1992-1-1,false,091234567,gamail@gmail.com,764nvl
+lead_003,hao Nguyen,1923-12-1,false,091234567,gamail@gmail.com,764nvl
+lead_004,bell,1992-1-13,true,091234567,gamail@gmail.com,764nvl
+lead_005,bella nguyen,1995-1-1,true,091234567,gamail@gmail.com,764nvl
+lead_006,nguyen tan song hao,2010-1-1,true,091234567,gamail@gmail.com,764nvl
+lead_007,Ngo Ngoc Anh,2000-1-1,true,091234567,gamail@gmail.com,764nvl
+lead_008,dat ,1992-1-1,false,091234567,gamail@gmail.com,764nvl
+lead_009,dat ,1923-12-1,true,091234567,gamail@gmail.com,764nvl
+lead_010,dat ,1992-1-13,true,091234567,gamail@gmail.com,764nvl
+lead_011,dat ,1995-1-1,true,091234567,gamail@gmail.com,764nvl
+lead_012,dat ,2010-1-1,true,091234567,gamail@gmail.com,764nvl
+lead_013,Dat Ngo,2000-11-22,false,0123456789,s123@rmit.edu.vn,123 Street 12
